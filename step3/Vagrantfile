@@ -1,0 +1,13 @@
+box      = 'phusion/ubuntu-14.04-amd64'
+
+Vagrant.configure(2) do |config|
+    config.vm.box = box
+
+    # Now let puppet do its thing.
+    config.vm.provision :puppet do |puppet|
+      puppet.manifests_path = 'puppet/manifests'
+      puppet.manifest_file = 'devenv.pp'
+      puppet.module_path = 'puppet/modules'
+      puppet.options = "--verbose"
+    end
+end
